@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
-  View,
-  Text,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -11,91 +9,125 @@ import {
   ActivityIndicator,
   ToastAndroid,
 } from 'react-native';
-const {height} = Dimensions.get('window');
-import {connect} from 'react-redux';
+import {Text, Layout} from '@ui-kitten/components';
+import {useSelector, useDispatch} from 'react-redux';
 import {loginUser} from './../redux/actions';
-function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  useEffect(() => {
-    if (props.status) {
-      props.navigation.navigate('Home');
+import {useForm, Controller} from 'react-hook-form';
+const {height} = Dimensions.get('window');
+function Login({navigation}) {
+  //---------------------------------------------------------------------------------------
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    const {email, password} = data;
+    if (email === '') {
+      ToastAndroid.show('please enter your email', 2000);
     }
-  });
+    if (password === '') {
+      ToastAndroid.show('please enter your password', 2000);
+    }
+    if (email !== '' && password !== '') {
+      dispatch(loginUser({email, password}));
+    }
+  };
+  //------------------------------------------------------------------------------------------
+  const {status, loading} = useSelector(({authRdx}) => authRdx);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (status) {
+      navigation.navigate('Home');
+    }
+  }, [status]);
   return (
-    <View style={styles.view}>
+    <Layout style={styles.view}>
       <StatusBar hidden={true} />
-      <View style={styles.header}>
+      <Layout style={styles.header}>
         <Image
           source={require('./../../images/logo.jpg')}
           style={styles.header}
         />
-      </View>
-      <View style={styles.circleView}>
+      </Layout>
+      <Layout style={styles.circleView}>
         <Image
           source={require('./../../images/efakka.png')}
           style={styles.imageStyle}
         />
-      </View>
+      </Layout>
       <Text style={styles.loginText}>Login</Text>
-      <View style={styles.textInputView}>
-        <TextInput
-          placeholder="Your email"
-          placeholderTextColor="grey"
-          //keyboardType={'number-pad'}
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={(text) => {
-            setEmail(text);
-          }}
-          style={styles.inputStyle}
+      <Layout style={styles.textInputView} level="3">
+        <Controller
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              onBlur={onBlur}
+              value={value}
+              placeholder="Your email"
+              placeholderTextColor="grey"
+              //keyboardType={'number-pad'}
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(text) => {
+                onChange(text);
+              }}
+              style={styles.inputStyle}
+            />
+          )}
+          name="email"
+          defaultValue=""
         />
-      </View>
-      <View style={styles.textInputView}>
-        <TextInput
-          placeholder="Password"
-          secureTextEntry={true}
-          placeholderTextColor="grey"
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={(text) => {
-            setPassword(text);
-          }}
-          style={styles.inputStyle}
+      </Layout>
+      <Layout style={styles.textInputView} level="3">
+        <Controller
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              onBlur={onBlur}
+              value={value}
+              placeholder="Password"
+              secureTextEntry={true}
+              placeholderTextColor="grey"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(text) => {
+                onChange(text);
+              }}
+              style={styles.inputStyle}
+            />
+          )}
+          name="password"
+          defaultValue=""
         />
-      </View>
+      </Layout>
       <TouchableOpacity onPress={() => {}} style={styles.forgetPassword}>
         <Text style={styles.forgetPasswordText}>Forgot you password ?</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {
-          if (email === '') {
-            ToastAndroid.show('please enter your email', 2000);
-          }
-          if (password === '') {
-            ToastAndroid.show('please enter your password', 2000);
-          }
-          if (email != '' && password != '') {
-            props.loginUser({email, password});
-          }
-        }}
+        onPress={handleSubmit(onSubmit)}
         style={styles.loginButton}>
-        {props.loading ? (
+        {loading ? (
           <ActivityIndicator size="small" color="#0000ff" />
         ) : (
-          <Text style={{color: 'white'}}>Login</Text>
+          <Text appearance="alternative" category="s1" status="control">
+            Login
+          </Text>
         )}
       </TouchableOpacity>
-      <View style={styles.accountQuestion}>
-        <Text style={styles.haveAccount}>Don't have an Account ? </Text>
+      <Layout style={styles.accountQuestion}>
+        <Text appearance="hint" style={styles.haveAccount}>
+          Don't have an Account ?
+        </Text>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('SignUp');
+            navigation.navigate('SignUp');
           }}>
-          <Text style={styles.signUpText}>Sign Up</Text>
+          <Text style={styles.signUpText}> Sign Up</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+      </Layout>
+    </Layout>
   );
 }
 const styles = StyleSheet.create({
@@ -132,7 +164,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   textInputView: {
-    backgroundColor: '#F2F2F2',
+    //backgroundColor: '#F2F2F2',
     width: '80%',
     height: 50,
     borderRadius: 15,
@@ -171,10 +203,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-const mapStateToProps = (state) => {
-  return {
-    loading: state.authRdx.loading,
-    status: state.authRdx.status,
-  };
-};
-export default connect(mapStateToProps, {loginUser})(Login);
+
+export default Login;
