@@ -8,12 +8,13 @@ import {
   Dimensions,
   ImageBackground,
   StatusBar,
-  ScrollView,
+  FlatList,
 } from 'react-native';
 import {Text, Layout} from '@ui-kitten/components';
 import MenuIcon from 'react-native-vector-icons/Ionicons';
 import TruckDetails from './TruckDetails';
 const {width} = Dimensions.get('window');
+const array = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 function AvailableTrucksScreen(props) {
   return (
     <View style={styles.pageStyle}>
@@ -22,15 +23,7 @@ function AvailableTrucksScreen(props) {
         <MenuIcon name={'menu'} size={40} style={styles.menuIconStyle} />
         <Text> Available Trucks</Text>
       </Layout>
-      <ScrollView>
-        <TruckDetails />
-        <TruckDetails />
-        <TruckDetails />
-        <TruckDetails />
-        <TruckDetails />
-        <TruckDetails />
-        <TruckDetails />
-      </ScrollView>
+      <FlatList data={array} renderItem={({item}) => <TruckDetails />} />
     </View>
   );
 }
