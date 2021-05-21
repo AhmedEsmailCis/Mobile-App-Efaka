@@ -79,7 +79,9 @@ function TruckDetails(props) {
           </Layout>
         </View>
         <Layout style={styles.bookButton}>
-          <TouchableOpacity style={styles.TouchableOpacityBookTruck}>
+          <TouchableOpacity
+            style={styles.TouchableOpacityBookTruck}
+            onPress={props.onPress}>
             <Text>Book Truck</Text>
           </TouchableOpacity>
         </Layout>

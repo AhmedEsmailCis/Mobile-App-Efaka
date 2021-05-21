@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Image,
@@ -10,20 +10,44 @@ import {
   StatusBar,
   FlatList,
 } from 'react-native';
-import {Text, Layout} from '@ui-kitten/components';
+import {Text, Layout, Modal} from '@ui-kitten/components';
 import MenuIcon from 'react-native-vector-icons/Ionicons';
 import TruckDetails from './TruckDetails';
+import TruckBookingModal from './TruckBookingModal';
 const {width} = Dimensions.get('window');
-const array = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+const array = [1, 2, 3, 4, 5, 6];
 function AvailableTrucksScreen(props) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [truckData, setTruckData] = useState();
+  const confirmBooking = (Details) => {
+    setTruckData(Details);
+    setModalVisible(true);
+    console.log(modalVisible);
+  };
   return (
     <View style={styles.pageStyle}>
       <StatusBar hidden={true} />
+      <TruckBookingModal
+        visible={modalVisible}
+        truckData={truckData}
+        onBackdropPress={() => {
+          setModalVisible(false);
+        }}
+      />
       <Layout style={styles.headerStyle}>
         <MenuIcon name={'menu'} size={40} style={styles.menuIconStyle} />
         <Text> Available Trucks</Text>
       </Layout>
-      <FlatList data={array} renderItem={({item}) => <TruckDetails />} />
+      <FlatList
+        data={array}
+        renderItem={({Details}) => (
+          <TruckDetails
+            onPress={() => {
+              confirmBooking(Details);
+            }}
+          />
+        )}
+      />
     </View>
   );
 }

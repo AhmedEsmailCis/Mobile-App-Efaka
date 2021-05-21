@@ -8,7 +8,10 @@ import {
 function TruckModal(props) {
   const [selectedIndex, setSelectedIndex] = useState('');
   return (
-    <Modal visible={props.visible} onBackdropPress={props.onBackdropPress}>
+    <Modal
+      visible={props.visible}
+      onBackdropPress={props.onBackdropPress}
+      backdropStyle={{backgroundColor: 'rgba(52, 52, 52, 0.3)'}}>
       <Layout style={styles.modalView}>
         <Image
           source={{
@@ -46,12 +49,14 @@ const styles = StyleSheet.create({
     height: hp('55%'),
     borderRadius: 5,
     alignItems: 'center',
+    paddingTop: hp('6'),
   },
   image: {
     width: wp('22%'),
     height: hp('12'),
     borderRadius: 50,
-    bottom: hp('4'),
+    top: hp('-4'),
+    position: 'absolute',
     backgroundColor: 'white',
   },
   pickerStyle: {
