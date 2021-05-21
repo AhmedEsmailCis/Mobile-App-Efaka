@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Image,
@@ -9,15 +9,23 @@ import {
   ImageBackground,
   StatusBar,
 } from 'react-native';
-import {Text, Layout} from '@ui-kitten/components';
+import {Text, Layout, Modal} from '@ui-kitten/components';
 import ServicesButton from './ServicesButton';
+import TruckModal from './TruckModal';
 import MenuIcon from 'react-native-vector-icons/Ionicons';
 const {height} = Dimensions.get('window');
 
 function HomeScreen(props) {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.pageStyle}>
       <StatusBar hidden={true} />
+      <TruckModal
+        visible={modalVisible}
+        onBackdropPress={() => {
+          setModalVisible(false);
+        }}
+      />
       <Layout style={styles.headerStyle}>
         <MenuIcon name={'menu'} size={40} style={styles.menuIconStyle} />
         <Text> Home</Text>
@@ -38,6 +46,9 @@ function HomeScreen(props) {
       <View style={styles.rowOfServiceContainer}>
         <ServicesButton
           text="cap services"
+          onPress={() => {
+            setModalVisible(true);
+          }}
           uri="https://www.iconpacks.net/icons/1/free-car-icon-1057-thumb.png"
         />
         <ServicesButton
