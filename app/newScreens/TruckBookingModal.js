@@ -11,7 +11,7 @@ function TruckBookingModal(props) {
     <Modal
       visible={props.visible}
       onBackdropPress={props.onBackdropPress}
-      backdropStyle={styles.modal}>
+      backdropStyle={styles.backdropStyle}>
       <Layout style={styles.modalView}>
         <Layout style={styles.detailsContainer}>
           <Image
@@ -35,66 +35,75 @@ function TruckBookingModal(props) {
         </Layout>
         <Layout style={styles.rowBetweenTriangles}>
           <Triangle style={styles.leftTriangle} />
+          <Layout style={styles.spaceView} />
           <Triangle style={styles.rightTriangle} />
         </Layout>
-        <Input
-          placeholder="Arrival Location"
-          size="small"
-          style={styles.input}
-        />
-        <Datepicker
-          placeholder="Arrival Date-time"
-          size="small"
-          accessoryRight={() => (
-            <DateIcon color="black" size={20} name="date-range" />
-          )}
-          style={styles.datePicker}
-        />
-        <Datepicker
-          placeholder="Return Date-time"
-          size="small"
-          accessoryRight={() => (
-            <DateIcon color="black" size={20} name="date-range" />
-          )}
-          style={styles.datePicker}
-        />
+        <Layout style={styles.groupComponent}>
+          <Input
+            placeholder="Arrival Location"
+            size="small"
+            style={styles.input}
+          />
+          <Datepicker
+            placeholder="Arrival Date-time"
+            size="small"
+            accessoryRight={() => (
+              <DateIcon color="black" size={20} name="date-range" />
+            )}
+            style={styles.datePicker}
+          />
+          <Datepicker
+            placeholder="Return Date-time"
+            size="small"
+            accessoryRight={() => (
+              <DateIcon color="black" size={20} name="date-range" />
+            )}
+            style={styles.datePicker}
+          />
+        </Layout>
         <Layout style={styles.rowBetweenTriangles}>
           <Triangle style={styles.leftTriangle} />
+          <Layout style={styles.spaceView} />
           <Triangle style={styles.rightTriangle} />
         </Layout>
-        <Layout style={styles.rowBetweenLabelPrice}>
-          <Text>5 days</Text>
-          <Text appearance="hint">1500 LE</Text>
-        </Layout>
-        <Layout level="4" style={styles.line} />
-        <Layout style={styles.rowBetweenLabelPrice}>
-          <Text>Total</Text>
-          <Text appearance="hint">2300 LE</Text>
-        </Layout>
-        <Layout style={styles.buttonStyle}>
-          <TouchableOpacity style={styles.TouchStyle}>
-            <Text>Confirm Booking</Text>
-          </TouchableOpacity>
+        <Layout style={styles.groupComponent}>
+          <Layout style={styles.rowBetweenLabelPrice}>
+            <Text>5 days</Text>
+            <Text appearance="hint">1500 LE</Text>
+          </Layout>
+          <Layout level="4" style={styles.line} />
+          <Layout style={styles.rowBetweenLabelPrice}>
+            <Text>Total</Text>
+            <Text appearance="hint">2300 LE</Text>
+          </Layout>
+          <Layout style={styles.buttonStyle}>
+            <TouchableOpacity style={styles.TouchStyle}>
+              <Text>Confirm Booking</Text>
+            </TouchableOpacity>
+          </Layout>
         </Layout>
       </Layout>
     </Modal>
   );
 }
 const styles = StyleSheet.create({
-  modal: {backgroundColor: 'rgba(52, 52, 52, 0.3)'},
+  backdropStyle: {backgroundColor: 'rgba(52, 52, 52, 0.3)'},
   modalView: {
     width: wp('80%'),
     height: hp('70%'),
     borderRadius: 5,
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   detailsContainer: {
-    height: '20%',
+    width: wp('80%'),
+    height: '30%',
     flexDirection: 'row',
-    marginLeft: '10%',
-    marginRight: '10%',
-    marginTop: '10%',
-    marginBottom: '5%',
+    paddingLeft: '10%',
+    paddingRight: '10%',
+    paddingTop: '10%',
+    paddingBottom: '5%',
+    backgroundColor: 'white',
   },
   image: {
     width: '40%',
@@ -120,19 +129,32 @@ const styles = StyleSheet.create({
     borderLeftWidth: wp('2'),
     borderRightWidth: wp('2'),
     borderBottomWidth: wp('4'),
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
+    borderLeftColor: 'white',
+    borderRightColor: 'white',
   },
   rowBetweenTriangles: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   leftTriangle: {
-    borderBottomColor: 'black',
+    borderBottomColor: 'transparent',
     transform: [{rotate: '90deg'}],
   },
-  rightTriangle: {borderBottomColor: 'grey', transform: [{rotate: '-90deg'}]},
+  rightTriangle: {
+    borderBottomColor: 'transparent',
+    transform: [{rotate: '-90deg'}],
+  },
+  spaceView: {
+    backgroundColor: 'white',
+    height: wp('4'),
+    flex: 1,
+  },
+  groupComponent: {
+    backgroundColor: 'white',
+    width: wp('80%'),
+  },
   input: {
     paddingLeft: wp('5'),
     paddingRight: wp('5'),
