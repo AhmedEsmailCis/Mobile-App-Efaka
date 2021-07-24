@@ -1,26 +1,26 @@
-import React from 'react';
-import {StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {Text, Layout} from '@ui-kitten/components';
+import React from "react";
+import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Text, Layout } from "@ui-kitten/components";
 
-function ServiceButton(props) {
+function ServiceButton({ uri, text, onPress }) {
   return (
-    <TouchableOpacity style={{flex: 1}} onPress={props.onPress}>
+    <TouchableOpacity style={{ flex: 1 }} onPress={onPress}>
       <Layout style={styles.serviceContainer} level="2">
         <Image
           source={{
-            uri: props.uri,
+            uri,
           }}
           style={styles.image}
         />
-        <Text category="c1">{props.text}</Text>
+        <Text category="c1">{text}</Text>
       </Layout>
     </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({
   serviceContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     flex: 1,
     margin: 20,
     borderRadius: 5,

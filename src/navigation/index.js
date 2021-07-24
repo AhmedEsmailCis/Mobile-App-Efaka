@@ -1,10 +1,9 @@
-import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Starting from './screens/Starting';
-import Login from './screens/Login';
-import SignUp from './screens/SignUp';
-import DrawerNavigator from './DrawerNavigator';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import DrawerNavigator from "./DrawerNavigator";
+import { Login, ScanningBarcode, SignUp, Starting } from "../screens";
+
 const Stack = createStackNavigator();
 export default function StackNavigator() {
   return (
@@ -34,6 +33,13 @@ export default function StackNavigator() {
         <Stack.Screen
           name="Home"
           component={DrawerNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Barcode"
+          component={ScanningBarcode}
           options={{
             headerShown: false,
           }}
