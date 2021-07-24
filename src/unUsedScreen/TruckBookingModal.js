@@ -1,11 +1,12 @@
-import React from 'react';
-import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {Text, Layout, Modal, Datepicker, Input} from '@ui-kitten/components';
-import DateIcon from 'react-native-vector-icons/MaterialIcons';
+import React from "react";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Layout, Modal, Datepicker, Input } from "@ui-kitten/components";
+import DateIcon from "react-native-vector-icons/MaterialIcons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+} from "react-native-responsive-screen";
+
 function TruckBookingModal(props) {
   return (
     <Modal
@@ -17,7 +18,7 @@ function TruckBookingModal(props) {
           <Image
             style={styles.image}
             source={{
-              uri: 'https://almalnews.com/wp-content/uploads/2020/01/%D8%AA%D9%88%D9%8A%D9%88%D8%AA%D8%A7-%D9%87%D8%A7%D9%8A%D9%84%D9%88%D9%83%D8%B3.jpg',
+              uri: "https://almalnews.com/wp-content/uploads/2020/01/%D8%AA%D9%88%D9%8A%D9%88%D8%AA%D8%A7-%D9%87%D8%A7%D9%8A%D9%84%D9%88%D9%83%D8%B3.jpg",
             }}
           />
           <Layout>
@@ -26,7 +27,7 @@ function TruckBookingModal(props) {
               <Image
                 style={styles.companyLogo}
                 source={{
-                  uri: 'https://mostaql.hsoubcdn.com/uploads/643931-RhpRG-1581113767-5e3de1a7d6571.png',
+                  uri: "https://mostaql.hsoubcdn.com/uploads/643931-RhpRG-1581113767-5e3de1a7d6571.png",
                 }}
               />
               <Text style={styles.companyName}>El Tarek Auto</Text>
@@ -39,25 +40,17 @@ function TruckBookingModal(props) {
           <Triangle style={styles.rightTriangle} />
         </Layout>
         <Layout style={styles.groupComponent}>
-          <Input
-            placeholder="Arrival Location"
-            size="small"
-            style={styles.input}
-          />
+          <Input placeholder="Arrival Location" size="small" style={styles.input} />
           <Datepicker
             placeholder="Arrival Date-time"
             size="small"
-            accessoryRight={() => (
-              <DateIcon color="black" size={20} name="date-range" />
-            )}
+            accessoryRight={() => <DateIcon color="black" size={20} name="date-range" />}
             style={styles.datePicker}
           />
           <Datepicker
             placeholder="Return Date-time"
             size="small"
-            accessoryRight={() => (
-              <DateIcon color="black" size={20} name="date-range" />
-            )}
+            accessoryRight={() => <DateIcon color="black" size={20} name="date-range" />}
             style={styles.datePicker}
           />
         </Layout>
@@ -87,115 +80,113 @@ function TruckBookingModal(props) {
   );
 }
 const styles = StyleSheet.create({
-  backdropStyle: {backgroundColor: 'rgba(52, 52, 52, 0.3)'},
+  backdropStyle: { backgroundColor: "rgba(52, 52, 52, 0.3)" },
   modalView: {
-    width: wp('80%'),
-    height: hp('70%'),
+    width: wp("80%"),
+    height: hp("70%"),
     borderRadius: 5,
-    alignItems: 'center',
-    backgroundColor: 'transparent',
+    alignItems: "center",
+    backgroundColor: "transparent",
   },
   detailsContainer: {
-    width: wp('80%'),
-    height: '30%',
-    flexDirection: 'row',
-    paddingLeft: '10%',
-    paddingRight: '10%',
-    paddingTop: '10%',
-    paddingBottom: '5%',
-    backgroundColor: 'white',
+    width: wp("80%"),
+    height: "30%",
+    flexDirection: "row",
+    paddingLeft: "10%",
+    paddingRight: "10%",
+    paddingTop: "10%",
+    paddingBottom: "5%",
+    backgroundColor: "white",
   },
   image: {
-    width: '40%',
-    height: '100%',
-    marginRight: '2%',
+    width: "40%",
+    height: "100%",
+    marginRight: "2%",
   },
   companyContainer: {
-    flexDirection: 'row',
-    marginTop: hp('3'),
+    flexDirection: "row",
+    marginTop: hp("3"),
   },
   companyLogo: {
-    width: '45%',
-    height: '100%',
+    width: "45%",
+    height: "100%",
   },
   companyName: {
-    fontSize: hp('1.5'),
+    fontSize: hp("1.5"),
   },
   triangle: {
     width: 0,
     height: 0,
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderLeftWidth: wp('2'),
-    borderRightWidth: wp('2'),
-    borderBottomWidth: wp('4'),
-    borderLeftColor: 'white',
-    borderRightColor: 'white',
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderLeftWidth: wp("2"),
+    borderRightWidth: wp("2"),
+    borderBottomWidth: wp("4"),
+    borderLeftColor: "white",
+    borderRightColor: "white",
   },
   rowBetweenTriangles: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    backgroundColor: 'transparent',
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    backgroundColor: "transparent",
   },
   leftTriangle: {
-    borderBottomColor: 'transparent',
-    transform: [{rotate: '90deg'}],
+    borderBottomColor: "transparent",
+    transform: [{ rotate: "90deg" }],
   },
   rightTriangle: {
-    borderBottomColor: 'transparent',
-    transform: [{rotate: '-90deg'}],
+    borderBottomColor: "transparent",
+    transform: [{ rotate: "-90deg" }],
   },
   spaceView: {
-    backgroundColor: 'white',
-    height: wp('4'),
+    backgroundColor: "white",
+    height: wp("4"),
     flex: 1,
   },
   groupComponent: {
-    backgroundColor: 'white',
-    width: wp('80%'),
+    backgroundColor: "white",
+    width: wp("80%"),
   },
   input: {
-    paddingLeft: wp('5'),
-    paddingRight: wp('5'),
-    marginBottom: hp('2'),
+    paddingLeft: wp("5"),
+    paddingRight: wp("5"),
+    marginBottom: hp("2"),
   },
   datePicker: {
-    paddingLeft: wp('5'),
-    paddingRight: wp('5'),
-    width: '100%',
-    marginBottom: hp('2'),
+    paddingLeft: wp("5"),
+    paddingRight: wp("5"),
+    width: "100%",
+    marginBottom: hp("2"),
   },
   rowBetweenLabelPrice: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: wp('5'),
-    paddingRight: wp('5'),
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingLeft: wp("5"),
+    paddingRight: wp("5"),
+    width: "100%",
   },
   line: {
     height: 2,
-    width: '90%',
-    marginBottom: hp('1'),
-    marginTop: hp('1'),
+    width: "90%",
+    marginBottom: hp("1"),
+    marginTop: hp("1"),
   },
   buttonStyle: {
-    backgroundColor: '#FAD201',
-    margin: hp('3'),
-    width: wp('70'),
-    height: hp('6'),
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#FAD201",
+    margin: hp("3"),
+    width: wp("70"),
+    height: hp("6"),
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 5,
   },
   TouchStyle: {
-    width: wp('70'),
-    height: hp('6'),
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: wp("70"),
+    height: hp("6"),
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export default TruckBookingModal;
-const Triangle = (props) => {
-  return <View style={[styles.triangle, props.style]} />;
-};
+const Triangle = (props) => <View style={[styles.triangle, props.style]} />;

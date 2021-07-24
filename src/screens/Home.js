@@ -1,36 +1,30 @@
-import React from 'react';
+import React from "react";
 import {
   View,
-  Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   TextInput,
   Dimensions,
   ImageBackground,
   StatusBar,
-} from 'react-native';
-import MenuIcon from 'react-native-vector-icons/Ionicons';
-import ScanIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-const {height} = Dimensions.get('window');
-function Home(props) {
+} from "react-native";
+import { Text } from "@ui-kitten/components";
+import MenuIcon from "react-native-vector-icons/Ionicons";
+import ScanIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { IMAGES } from "../common";
+
+const { height } = Dimensions.get("window");
+export function Home(props) {
   return (
     <View style={styles.view}>
-      <StatusBar hidden={true} />
+      <StatusBar hidden />
       <View style={styles.header}>
-        <ImageBackground
-          source={require('../../images/logo.jpg')}
-          style={styles.imageBackground}>
+        <ImageBackground source={IMAGES.logo} style={styles.imageBackground}>
           <TouchableOpacity
             onPress={() => {
               props.navigation.openDrawer();
             }}>
-            <MenuIcon
-              color="white"
-              name={'menu'}
-              size={40}
-              style={{marginLeft: 10}}
-            />
+            <MenuIcon color="white" name="menu" size={40} style={{ marginLeft: 10 }} />
           </TouchableOpacity>
           <Text style={styles.headerText}>Welcome back,</Text>
           <Text style={styles.headerText}>Hassan</Text>
@@ -39,17 +33,19 @@ function Home(props) {
               <TextInput
                 placeholder="code / mobile number"
                 placeholderTextColor="black"
-                keyboardType={'number-pad'}  
+                keyboardType="number-pad"
                 autoCorrect={false}
                 autoCapitalize="none"
-                onChangeText={(text) => {}}
+                // onChangeText={(text) => {}}
                 style={styles.inputStyle}
               />
             </View>
             <View style={styles.scan}>
-              <TouchableOpacity onPress={() => {
-              }}>
-                <ScanIcon color="black" name={'barcode-scan'} size={33} />
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("Barcode");
+                }}>
+                <ScanIcon color="black" name="barcode-scan" size={33} />
               </TouchableOpacity>
             </View>
           </View>
@@ -68,53 +64,53 @@ function Home(props) {
         <TextInput
           placeholder="insert number of points"
           placeholderTextColor="grey"
-          keyboardType={'number-pad'}
+          keyboardType="number-pad"
           autoCorrect={false}
           autoCapitalize="none"
-          onChangeText={(text) => {}}
+          // onChangeText={(text) => {}}
           style={styles.numberOfPointsInputStyle}
         />
       </View>
       <TouchableOpacity onPress={() => {}} style={styles.signupButton}>
-        <Text style={{color: '#FFFFFF'}}>Transfer now</Text>
+        <Text appearance="alternative">Transfer now</Text>
       </TouchableOpacity>
     </View>
   );
 }
 const styles = StyleSheet.create({
   view: {
-    alignItems: 'center',
-    backgroundColor: 'white',
+    alignItems: "center",
+    backgroundColor: "white",
     flex: 1,
   },
   header: {
-    width: '100%',
+    width: "100%",
     height: height * 0.42,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    backgroundColor: 'red',
+    backgroundColor: "red",
   },
   imageBackground: {
     flex: 1,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   viewOfScanning: {
-    alignSelf: 'center',
-    flexDirection: 'row',
+    alignSelf: "center",
+    flexDirection: "row",
     marginBottom: 20,
     marginTop: 20,
   },
   headerText: {
-    color: 'white',
+    color: "white",
     fontSize: 40,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 10,
   },
   textInputView: {
-    backgroundColor: 'white',
-    width: '60%',
+    backgroundColor: "white",
+    width: "60%",
     height: 50,
     borderRadius: 10,
     elevation: 0.5,
@@ -125,50 +121,50 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scan: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     width: 50,
     height: 50,
     borderRadius: 10,
     elevation: 0.5,
     marginBottom: 10,
     marginLeft: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   pointsView: {
-    backgroundColor: '#F2F2F2',
-    width: '80%',
+    backgroundColor: "#F2F2F2",
+    width: "80%",
     height: 100,
     marginTop: 30,
     borderRadius: 10,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingLeft: 20,
   },
   pointText: {
-    color: 'black',
+    color: "black",
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   rowOfPointsResult: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
+    flexDirection: "row",
+    alignItems: "baseline",
   },
   points: {
-    color: '#F0C13C',
+    color: "#F0C13C",
     fontSize: 35,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginRight: 10,
   },
   labelOfNumberOfPoints: {
-    fontWeight: 'bold',
-    alignSelf: 'flex-start',
-    marginLeft: '10%',
+    fontWeight: "bold",
+    alignSelf: "flex-start",
+    marginLeft: "10%",
     marginTop: 40,
     marginBottom: 10,
   },
   textNumberOfPointInputView: {
-    backgroundColor: '#F2F2F2',
-    width: '80%',
+    backgroundColor: "#F2F2F2",
+    width: "80%",
     height: 50,
     borderRadius: 15,
     elevation: 0.5,
@@ -179,14 +175,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   signupButton: {
-    backgroundColor: '#003C51',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '80%',
+    backgroundColor: "#003C51",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "80%",
     height: 50,
     borderRadius: 15,
     elevation: 0.5,
     marginBottom: 10,
   },
 });
-export default Home;

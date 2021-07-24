@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import {
   Image,
   StyleSheet,
@@ -8,66 +8,59 @@ import {
   StatusBar,
   ActivityIndicator,
   ToastAndroid,
-} from 'react-native';
-import {Text, Layout} from '@ui-kitten/components';
-import {useSelector, useDispatch} from 'react-redux';
-import {loginUser} from './../redux/actions';
-import {useForm, Controller} from 'react-hook-form';
-const {height} = Dimensions.get('window');
-function Login({navigation}) {
-  //---------------------------------------------------------------------------------------
+} from "react-native";
+import { Text, Layout } from "@ui-kitten/components";
+import { useSelector, useDispatch } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+import { loginUser } from "../redux/actions";
+import { IMAGES } from "../common";
+
+const { height } = Dimensions.get("window");
+export function Login({ navigation }) {
   const {
     control,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    const {email, password} = data;
-    if (email === '') {
-      ToastAndroid.show('please enter your email', 2000);
+    const { email, password } = data;
+    if (email === "") {
+      ToastAndroid.show("please enter your email", 2000);
     }
-    if (password === '') {
-      ToastAndroid.show('please enter your password', 2000);
+    if (password === "") {
+      ToastAndroid.show("please enter your password", 2000);
     }
-    if (email !== '' && password !== '') {
-      dispatch(loginUser({email, password}));
+    if (email !== "" && password !== "") {
+      dispatch(loginUser({ email, password }));
     }
   };
-  //------------------------------------------------------------------------------------------
-  const {status, loading} = useSelector(({authRdx}) => authRdx);
+  const { status, loading } = useSelector(({ authRdx }) => authRdx);
   const dispatch = useDispatch();
   useEffect(() => {
     if (status) {
-      navigation.navigate('Home');
+      navigation.navigate("Home");
     }
   }, [status]);
   return (
     <Layout style={styles.view}>
-      <StatusBar hidden={true} />
+      <StatusBar hidden />
       <Layout style={styles.header}>
-        <Image
-          source={require('./../../images/logo.jpg')}
-          style={styles.header}
-        />
+        <Image source={IMAGES.logo} style={styles.header} />
       </Layout>
       <Layout style={styles.circleView}>
-        <Image
-          source={require('./../../images/efakka.png')}
-          style={styles.imageStyle}
-        />
+        <Image source={IMAGES.efakka} style={styles.imageStyle} />
       </Layout>
       <Text style={styles.loginText}>Login</Text>
       <Layout style={styles.textInputView} level="3">
         <Controller
           control={control}
-          render={({field: {onChange, onBlur, value}}) => (
+          render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               onBlur={onBlur}
               value={value}
               placeholder="Your email"
               placeholderTextColor="grey"
-              //keyboardType={'number-pad'}
+              // keyboardType={'number-pad'}
               autoCorrect={false}
               autoCapitalize="none"
               onChangeText={(text) => {
@@ -83,12 +76,12 @@ function Login({navigation}) {
       <Layout style={styles.textInputView} level="3">
         <Controller
           control={control}
-          render={({field: {onChange, onBlur, value}}) => (
+          render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               onBlur={onBlur}
               value={value}
               placeholder="Password"
-              secureTextEntry={true}
+              secureTextEntry
               placeholderTextColor="grey"
               autoCorrect={false}
               autoCapitalize="none"
@@ -105,9 +98,7 @@ function Login({navigation}) {
       <TouchableOpacity onPress={() => {}} style={styles.forgetPassword}>
         <Text style={styles.forgetPasswordText}>Forgot you password ?</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={handleSubmit(onSubmit)}
-        style={styles.loginButton}>
+      <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.loginButton}>
         {loading ? (
           <ActivityIndicator size="small" color="#0000ff" />
         ) : (
@@ -122,7 +113,7 @@ function Login({navigation}) {
         </Text>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('SignUp');
+            navigation.navigate("SignUp");
           }}>
           <Text style={styles.signUpText}> Sign Up</Text>
         </TouchableOpacity>
@@ -132,13 +123,13 @@ function Login({navigation}) {
 }
 const styles = StyleSheet.create({
   view: {
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
     flex: 1,
   },
   header: {
-    backgroundColor: 'red',
-    width: '100%',
+    backgroundColor: "red",
+    width: "100%",
     height: height * 0.33,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
@@ -146,26 +137,26 @@ const styles = StyleSheet.create({
   circleView: {
     width: 100,
     height: 100,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     bottom: 50,
     borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   imageStyle: {
     width: 70,
     height: 70,
-    //borderRadius: 50,
+    // borderRadius: 50,
   },
   loginText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: -20,
     marginBottom: 20,
   },
   textInputView: {
-    //backgroundColor: '#F2F2F2',
-    width: '80%',
+    // backgroundColor: '#F2F2F2',
+    width: "80%",
     height: 50,
     borderRadius: 15,
     elevation: 0.5,
@@ -176,32 +167,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   forgetPassword: {
-    width: '80%',
+    width: "80%",
     marginBottom: 20,
   },
   forgetPasswordText: {
-    color: 'blue',
+    color: "blue",
   },
   loginButton: {
-    backgroundColor: '#003C51',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '80%',
+    backgroundColor: "#003C51",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "80%",
     height: 50,
     borderRadius: 15,
     elevation: 0.5,
     marginBottom: 10,
   },
   accountQuestion: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   haveAccount: {
-    color: 'grey',
+    color: "grey",
   },
   signUpText: {
-    color: 'blue',
-    fontWeight: 'bold',
+    color: "blue",
+    fontWeight: "bold",
   },
 });
-
-export default Login;
